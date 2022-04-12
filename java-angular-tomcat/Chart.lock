@@ -1,0 +1,9 @@
+dependencies:
+- name: frontend
+  repository: file://../frontend/helm
+  version: 0.1.0
+- name: backend
+  repository: file://../backend/helm
+  version: 0.1.0
+digest: sha256:7e5e499f4dc827c7dde490651a58a6f44d5428f868d37dbe03cd6f32a7fa0522
+generated: "2022-04-12T15:38:44.1412271+03:00"
