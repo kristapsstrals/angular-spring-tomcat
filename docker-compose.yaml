@@ -1,0 +1,5 @@
+# Create a compose file for
+# 1. frontend app with nodejs server
+# 2. backend app with tomcat server
+# 3. nginx proxy to route between the two apps and just expose the proxy
+
