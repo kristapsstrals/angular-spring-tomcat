@@ -3,7 +3,7 @@ WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend .
-RUN npm run build -- --base-href /frontend/
+RUN npm run build -- --base-href /iris/client/
 
 FROM gradle:jdk11-alpine as backendbuild
 WORKDIR /app
@@ -14,7 +14,12 @@ COPY backend/src src
 RUN gradle bootWar
 
 FROM tomcat:8.5
-COPY --from=frontendbuild /app/dist/angular /usr/local/tomcat/webapps/frontend
-COPY --from=backendbuild /app/build/libs/app.war /usr/local/tomcat/webapps/backend.war
+# COPY --from=frontendbuild /app/dist/angular /usr/local/tomcat/webapps/frontend
+# COPY --from=backendbuild /app/build/libs/app.war /usr/local/tomcat/webapps/backend.war
+
+# mimic how it looks like for iris
+COPY --from=frontendbuild /app/dist/angular /usr/local/tomcat/webapps/iris#client
+COPY --from=backendbuild /app/build/libs/app.war /usr/local/tomcat/webapps/iris.war
+
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
